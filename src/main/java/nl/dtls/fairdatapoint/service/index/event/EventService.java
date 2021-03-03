@@ -28,7 +28,6 @@ import nl.dtls.fairdatapoint.api.dto.index.ping.PingDTO;
 import nl.dtls.fairdatapoint.database.mongo.repository.EventRepository;
 import nl.dtls.fairdatapoint.database.mongo.repository.IndexEntryRepository;
 import nl.dtls.fairdatapoint.entity.exception.ResourceNotFoundException;
-import nl.dtls.fairdatapoint.entity.index.config.EventsConfig;
 import nl.dtls.fairdatapoint.entity.index.entry.IndexEntry;
 import nl.dtls.fairdatapoint.entity.index.entry.IndexEntryState;
 import nl.dtls.fairdatapoint.entity.index.event.Event;
@@ -39,11 +38,13 @@ import nl.dtls.fairdatapoint.entity.index.http.Exchange;
 import nl.dtls.fairdatapoint.entity.index.http.ExchangeState;
 import nl.dtls.fairdatapoint.service.index.common.RequiredEnabledIndexFeature;
 import nl.dtls.fairdatapoint.service.index.entry.IndexEntryService;
+import nl.dtls.fairdatapoint.service.index.settings.IndexSettingsService;
 import nl.dtls.fairdatapoint.service.index.webhook.WebhookService;
 import org.eclipse.rdf4j.util.iterators.EmptyIterator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.scheduling.annotation.Async;
@@ -74,19 +75,20 @@ public class EventService {
     private IndexEntryRepository indexEntryRepository;
 
     @Autowired
+    @Lazy
     private IndexEntryService indexEntryService;
 
     @Autowired
     private WebhookService webhookService;
 
     @Autowired
-    private EventsConfig eventsConfig;
-
-    @Autowired
     private EventMapper eventMapper;
 
     @Autowired
     private IncomingPingUtils incomingPingUtils;
+
+    @Autowired
+    private IndexSettingsService indexSettingsService;
 
     public Iterable<Event> getEvents(IndexEntry indexEntry) {
         // TODO: make events pagination in the future
@@ -103,14 +105,15 @@ public class EventService {
     @SneakyThrows
     public Event acceptIncomingPing(PingDTO reqDto, HttpServletRequest request) {
         var remoteAddr = request.getRemoteAddr();
-        var rateLimitSince = Instant.now().minus(eventsConfig.getPingRateLimitDuration());
+        var pingSettings = indexSettingsService.getOrDefaults().getPing();
+        var rateLimitSince = Instant.now().minus(pingSettings.getRateLimitDuration());
         var previousPings = eventRepository.findAllByIncomingPingExchangeRemoteAddrAndCreatedAfter(remoteAddr,
                 rateLimitSince);
-        if (previousPings.size() > eventsConfig.getPingRateLimitHits()) {
+        if (previousPings.size() > pingSettings.getRateLimitHits()) {
             logger.warn("Rate limit for PING reached by {}", remoteAddr);
             throw new RateLimitException(String.format(
                     "Rate limit reached for %s (max. %d per %s) - PING ignored",
-                    remoteAddr, eventsConfig.getPingRateLimitHits(), eventsConfig.getPingRateLimitDuration().toString())
+                    remoteAddr, pingSettings.getRateLimitHits(), pingSettings.getRateLimitDuration().toString())
             );
         }
 
@@ -137,14 +140,15 @@ public class EventService {
     }
 
     private void processMetadataRetrieval(Event event) {
-        String clientUrl = event.getRelatedTo().getClientUrl();
-        if (MetadataRetrievalUtils.shouldRetrieve(event, eventsConfig.getRetrievalRateLimitWait())) {
+        var retrievalSettings = indexSettingsService.getOrDefaults().getRetrieval();
+        var clientUrl = event.getRelatedTo().getClientUrl();
+        if (MetadataRetrievalUtils.shouldRetrieve(event, retrievalSettings.getRateLimitWait())) {
             indexEntryRepository.save(event.getRelatedTo());
             eventRepository.save(event);
             event.execute();
 
             logger.info("Retrieving metadata for {}", clientUrl);
-            MetadataRetrievalUtils.retrieveRepositoryMetadata(event, eventsConfig.getRetrievalTimeout());
+            MetadataRetrievalUtils.retrieveRepositoryMetadata(event, retrievalSettings.getTimeout());
             Exchange ex = event.getMetadataRetrieval().getExchange();
             if (ex.getState() == ExchangeState.Retrieved) {
                 try {

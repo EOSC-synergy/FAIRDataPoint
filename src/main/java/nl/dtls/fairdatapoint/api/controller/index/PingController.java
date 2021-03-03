@@ -65,6 +65,7 @@ public class PingController {
     @RequestMapping(method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity<Void> receivePing(@RequestBody @Valid PingDTO reqDto, HttpServletRequest request) throws MetadataRepositoryException {
+        // TODO move denying to service
         logger.info("Received ping from {}", request.getRemoteAddr());
         if (indexSettingsService.isPingDenied(reqDto)) {
             logger.info("Received ping is denied");

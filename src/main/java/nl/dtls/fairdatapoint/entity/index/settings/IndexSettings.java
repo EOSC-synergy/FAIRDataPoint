@@ -20,29 +20,49 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package nl.dtls.fairdatapoint.entity.index;
+package nl.dtls.fairdatapoint.entity.index.settings;
 
 import lombok.*;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.validation.constraints.NotNull;
+import java.util.Objects;
 
 @Document
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode
+@Builder(toBuilder = true)
 public class IndexSettings {
     @Id
     protected ObjectId id;
 
-    private List<String> denyList;
+    @NotNull
+    private IndexSettingsRetrieval retrieval;
+
+    @NotNull
+    private IndexSettingsPing ping;
 
     public static IndexSettings getDefault() {
-        return new IndexSettings(ObjectId.get(), new ArrayList<>());
+        IndexSettings settings = new IndexSettings();
+        settings.setPing(IndexSettingsPing.getDefault());
+        settings.setRetrieval(IndexSettingsRetrieval.getDefault());
+        return settings;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        IndexSettings that = (IndexSettings) o;
+        return retrieval.equals(that.retrieval) && ping.equals(that.ping);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(retrieval, ping);
     }
 }

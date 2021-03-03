@@ -20,19 +20,21 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package nl.dtls.fairdatapoint.entity.index.config;
+package nl.dtls.fairdatapoint.api.validator;
 
-import lombok.Builder;
-import lombok.Data;
+import javax.validation.Constraint;
+import javax.validation.Payload;
+import java.lang.annotation.*;
 
-import java.time.Duration;
+@Documented
+@Constraint(validatedBy = DurationValidator.class)
+@Target({ElementType.METHOD, ElementType.FIELD, ElementType.TYPE_USE})
+@Retention(RetentionPolicy.RUNTIME)
+public @interface ValidDuration {
 
-@Builder
-@Data
-public class EventsConfig {
-    private final Duration retrievalRateLimitWait;
-    private final Duration retrievalTimeout;
-    private final Duration pingValidDuration;
-    private final Duration pingRateLimitDuration;
-    private final int pingRateLimitHits;
+    String message() default "Invalid ISO-8601 duration";
+
+    Class<?>[] groups() default {};
+
+    Class<? extends Payload>[] payload() default {};
 }

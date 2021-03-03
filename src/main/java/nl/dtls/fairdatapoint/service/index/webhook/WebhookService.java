@@ -28,11 +28,11 @@ import nl.dtls.fairdatapoint.api.dto.index.webhook.WebhookPayloadDTO;
 import nl.dtls.fairdatapoint.database.mongo.repository.EventRepository;
 import nl.dtls.fairdatapoint.database.mongo.repository.WebhookRepository;
 import nl.dtls.fairdatapoint.entity.exception.ResourceNotFoundException;
-import nl.dtls.fairdatapoint.entity.index.config.EventsConfig;
 import nl.dtls.fairdatapoint.entity.index.event.Event;
 import nl.dtls.fairdatapoint.entity.index.webhook.Webhook;
 import nl.dtls.fairdatapoint.entity.index.webhook.WebhookEvent;
 import nl.dtls.fairdatapoint.service.index.common.RequiredEnabledIndexFeature;
+import nl.dtls.fairdatapoint.service.index.settings.IndexSettingsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,12 +64,13 @@ public class WebhookService {
     EventRepository eventRepository;
 
     @Autowired
-    private EventsConfig eventsConfig;
+    private IndexSettingsService indexSettingsService;
 
     private static final String SECRET_PLACEHOLDER = "*** HIDDEN ***";
 
     @RequiredEnabledIndexFeature
     public void processWebhookTrigger(Event event) {
+        var retrievalSettings = indexSettingsService.getOrDefaults().getRetrieval();
         event.execute();
         eventRepository.save(event);
         WebhookPayloadDTO webhookPayload = webhookMapper.toWebhookPayloadDTO(event);
@@ -78,7 +79,7 @@ public class WebhookService {
             String signature = WebhookUtils.computeHashSignature(payloadWithSecret);
             webhookPayload.setSecret(SECRET_PLACEHOLDER);
             String payloadWithoutSecret = objectMapper.writeValueAsString(webhookPayload);
-            WebhookUtils.postWebhook(event, eventsConfig.getRetrievalTimeout(), payloadWithoutSecret, signature);
+            WebhookUtils.postWebhook(event, retrievalSettings.getTimeout(), payloadWithoutSecret, signature);
         } catch (JsonProcessingException e) {
             logger.error("Failed to convert webhook payload to string");
         } catch (NoSuchAlgorithmException e) {
@@ -128,17 +129,10 @@ public class WebhookService {
                 break;
             case MetadataRetrieval:
                 switch (triggerEvent.getRelatedTo().getState()) {
-                    case Valid:
-                        triggerWebhooks(WebhookEvent.EntryValid, triggerEvent);
-                        break;
-                    case Invalid:
-                        triggerWebhooks(WebhookEvent.EntryInvalid, triggerEvent);
-                        break;
-                    case Unreachable:
-                        triggerWebhooks(WebhookEvent.EntryUnreachable, triggerEvent);
-                        break;
-                    default:
-                        logger.warn("Invalid state of MetadataRetrieval: {}", triggerEvent.getRelatedTo().getState());
+                    case Valid -> triggerWebhooks(WebhookEvent.EntryValid, triggerEvent);
+                    case Invalid -> triggerWebhooks(WebhookEvent.EntryInvalid, triggerEvent);
+                    case Unreachable -> triggerWebhooks(WebhookEvent.EntryUnreachable, triggerEvent);
+                    default -> logger.warn("Invalid state of MetadataRetrieval: {}", triggerEvent.getRelatedTo().getState());
                 }
                 break;
             case WebhookPing:
