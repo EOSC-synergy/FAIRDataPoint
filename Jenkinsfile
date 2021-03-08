@@ -13,9 +13,7 @@ pipeline {
                 }
             }
             steps {
-                script {
-                    build job: "/${JOB_NAME}",
-                          propagate: true
+                sh "docker build -f Dockefile.build -t fairdatapoint:local ."
                 }
             }
         }
