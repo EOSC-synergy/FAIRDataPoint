@@ -1,0 +1,10 @@
+instance:
+  url: http://localhost
+
+server:
+  port: 80
+
+repository:
+  type: 2
+  native:
+    dir: /rdfdata
