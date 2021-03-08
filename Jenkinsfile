@@ -6,14 +6,14 @@ pipeline {
     }
 
     stages {
-        stage('Trigger CICD job') {
+        stage('Trigger FairDataPoint CICD job') {
             when {
                 anyOf {
                     branch 'develop'
                 }
             }
             steps {
-                sh "docker build -f Dockefile -t fairdatapoint:local ."
+                sh "docker build -f Dockefile.build -t fairdatapoint:local ."
                 }
             }
         }
