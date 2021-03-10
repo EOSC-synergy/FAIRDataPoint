@@ -1,0 +1,170 @@
+[
+  {
+    "@id": "_:genid-477e5fbdc9d147e89fcc5e5f55ac9709-t345",
+    "@type": [
+      "http://xmlns.com/foaf/0.1/Agent"
+    ],
+    "http://xmlns.com/foaf/0.1/name": [
+      {
+        "@value": "DANS-KNAW"
+      }
+    ]
+  },
+  {
+    "@id": "https://fairsfair.fair-dtls.surf-hosted.nl/dataset/fb33948b-8656-44aa-9bfc-4acd39d0784c",
+    "@type": [
+      "http://www.w3.org/ns/dcat#Resource",
+      "http://www.w3.org/ns/dcat#Dataset"
+    ],
+    "http://purl.org/dc/terms/accessRights": [
+      {
+        "@id": "https://fairsfair.fair-dtls.surf-hosted.nl/dataset/fb33948b-8656-44aa-9bfc-4acd39d0784c#accessRights"
+      }
+    ],
+    "http://purl.org/dc/terms/description": [
+      {
+        "@value": "Contents of NARCIS information on datasets and publications, Dublin Core metadata, stored as csv. (2018-07-01) "
+      }
+    ],
+    "http://purl.org/dc/terms/hasVersion": [
+      {
+        "@value": "Version 3.0"
+      }
+    ],
+    "http://purl.org/dc/terms/isPartOf": [
+      {
+        "@id": "https://fairsfair.fair-dtls.surf-hosted.nl/catalog/d34964ac-9603-46df-b9b5-2b8836c8026f"
+      }
+    ],
+    "http://purl.org/dc/terms/issued": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+        "@value": "2018-07-07T00:00:00.000Z"
+      }
+    ],
+    "http://purl.org/dc/terms/language": [
+      {
+        "@id": "http://id.loc.gov/vocabulary/iso639-1/en"
+      }
+    ],
+    "http://purl.org/dc/terms/license": [
+      {
+        "@id": "https://creativecommons.org/publicdomain/zero/1.0"
+      }
+    ],
+    "http://purl.org/dc/terms/publisher": [
+      {
+        "@id": "_:genid-477e5fbdc9d147e89fcc5e5f55ac9709-t345"
+      }
+    ],
+    "http://purl.org/dc/terms/rights": [
+      {
+        "@id": "http://purl.org/coar/access_right/c_abf2"
+      }
+    ],
+    "http://purl.org/dc/terms/title": [
+      {
+        "@value": "NARCIS metadata in Dublin Core (dc) format"
+      }
+    ],
+    "http://rdf.biosemantics.org/ontologies/fdp-o#metadataIdentifier": [
+      {
+        "@id": "https://fairsfair.fair-dtls.surf-hosted.nl/dataset/fb33948b-8656-44aa-9bfc-4acd39d0784c#identifier"
+      }
+    ],
+    "http://rdf.biosemantics.org/ontologies/fdp-o#metadataIssued": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+        "@value": "2021-03-02T14:54:43.662Z"
+      }
+    ],
+    "http://rdf.biosemantics.org/ontologies/fdp-o#metadataModified": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+        "@value": "2021-03-03T11:19:59.029Z"
+      }
+    ],
+    "http://semanticscience.org/resource/SIO_000628": [
+      {
+        "@id": "https://fairsfair.fair-dtls.surf-hosted.nl/dataset/fb33948b-8656-44aa-9bfc-4acd39d0784c/metrics/445c0a70d1e214e545b261559e2842f4"
+      },
+      {
+        "@id": "https://fairsfair.fair-dtls.surf-hosted.nl/dataset/fb33948b-8656-44aa-9bfc-4acd39d0784c/metrics/5d27e854a9e78eb3f663331cd47cdc13"
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "NARCIS metadata in Dublin Core (dc) format"
+      }
+    ],
+    "http://www.w3.org/ns/dcat#keyword": [
+      {
+        "@value": "NARCIS-punt-nl"
+      },
+      {
+        "@value": "Dublin Core"
+      }
+    ],
+    "http://www.w3.org/ns/dcat#landingPage": [
+      {
+        "@id": "https://doi.org/10.34894/QOH33L"
+      }
+    ],
+    "http://www.w3.org/ns/dcat#theme": [
+      {
+        "@id": "http://ns.thedatatank.com/dcat/themes#Government"
+      },
+      {
+        "@id": "http://publications.europa.eu/resource/authority/eurovoc/209065"
+      }
+    ]
+  },
+  {
+    "@id": "https://fairsfair.fair-dtls.surf-hosted.nl/dataset/fb33948b-8656-44aa-9bfc-4acd39d0784c#accessRights",
+    "@type": [
+      "http://purl.org/dc/terms/RightsStatement"
+    ],
+    "http://purl.org/dc/terms/description": [
+      {
+        "@value": "This resource has no access restriction"
+      }
+    ]
+  },
+  {
+    "@id": "https://fairsfair.fair-dtls.surf-hosted.nl/dataset/fb33948b-8656-44aa-9bfc-4acd39d0784c#identifier",
+    "@type": [
+      "http://purl.org/spar/datacite/Identifier"
+    ],
+    "http://purl.org/dc/terms/identifier": [
+      {
+        "@value": "https://fairsfair.fair-dtls.surf-hosted.nl/dataset/fb33948b-8656-44aa-9bfc-4acd39d0784c"
+      }
+    ]
+  },
+  {
+    "@id": "https://fairsfair.fair-dtls.surf-hosted.nl/dataset/fb33948b-8656-44aa-9bfc-4acd39d0784c/metrics/445c0a70d1e214e545b261559e2842f4",
+    "http://semanticscience.org/resource/SIO_000332": [
+      {
+        "@id": "https://www.ietf.org/rfc/rfc3986.txt"
+      }
+    ],
+    "http://semanticscience.org/resource/SIO_000628": [
+      {
+        "@id": "https://www.ietf.org/rfc/rfc3986.txt"
+      }
+    ]
+  },
+  {
+    "@id": "https://fairsfair.fair-dtls.surf-hosted.nl/dataset/fb33948b-8656-44aa-9bfc-4acd39d0784c/metrics/5d27e854a9e78eb3f663331cd47cdc13",
+    "http://semanticscience.org/resource/SIO_000332": [
+      {
+        "@id": "https://www.wikidata.org/wiki/Q8777"
+      }
+    ],
+    "http://semanticscience.org/resource/SIO_000628": [
+      {
+        "@id": "https://www.wikidata.org/wiki/Q8777"
+      }
+    ]
+  }
+]
