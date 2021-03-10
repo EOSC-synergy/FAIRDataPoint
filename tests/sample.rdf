@@ -1,0 +1,40 @@
+<https://fairsfair.fair-dtls.surf-hosted.nl/dataset/fb33948b-8656-44aa-9bfc-4acd39d0784c>
+  a <http://www.w3.org/ns/dcat#Dataset>, <http://www.w3.org/ns/dcat#Resource>;
+  <http://purl.org/dc/terms/accessRights> <https://fairsfair.fair-dtls.surf-hosted.nl/dataset/fb33948b-8656-44aa-9bfc-4acd39d0784c#accessRights>;
+  <http://purl.org/dc/terms/description> "Contents of NARCIS information on datasets and publications, Dublin Core metadata, stored as csv. (2018-07-01) ";
+  <http://purl.org/dc/terms/hasVersion> "Version 3.0";
+  <http://purl.org/dc/terms/isPartOf> <https://fairsfair.fair-dtls.surf-hosted.nl/catalog/d34964ac-9603-46df-b9b5-2b8836c8026f>;
+  <http://purl.org/dc/terms/issued> "2018-07-07T00:00:00.000Z"^^<http://www.w3.org/2001/XMLSchema#dateTime>;
+  <http://purl.org/dc/terms/language> <http://id.loc.gov/vocabulary/iso639-1/en>;
+  <http://purl.org/dc/terms/license> <https://creativecommons.org/publicdomain/zero/1.0>;
+  <http://purl.org/dc/terms/publisher> [ a <http://xmlns.com/foaf/0.1/Agent>;
+      <http://xmlns.com/foaf/0.1/name> "DANS"
+    ];
+  <http://purl.org/dc/terms/rights> <http://purl.org/coar/access_right/c_abf2>;
+  <http://purl.org/dc/terms/title> "NARCIS PORTAL metadata in Dublin Core (dc) format";
+  <http://rdf.biosemantics.org/ontologies/fdp-o#metadataIdentifier> <https://fairsfair.fair-dtls.surf-hosted.nl/dataset/fb33948b-8656-44aa-9bfc-4acd39d0784c#identifier>;
+  <http://rdf.biosemantics.org/ontologies/fdp-o#metadataIssued> "2021-03-02T14:54:43.662Z"^^<http://www.w3.org/2001/XMLSchema#dateTime>;
+  <http://rdf.biosemantics.org/ontologies/fdp-o#metadataModified> "2021-03-03T11:19:59.029Z"^^<http://www.w3.org/2001/XMLSchema#dateTime>;
+  <http://semanticscience.org/resource/SIO_000628> <https://fairsfair.fair-dtls.surf-hosted.nl/dataset/fb33948b-8656-44aa-9bfc-4acd39d0784c/metrics/445c0a70d1e214e545b261559e2842f4>,
+    <https://fairsfair.fair-dtls.surf-hosted.nl/dataset/fb33948b-8656-44aa-9bfc-4acd39d0784c/metrics/5d27e854a9e78eb3f663331cd47cdc13>;
+  <http://www.w3.org/2000/01/rdf-schema#label> "NARCIS Portal metadata in Dublin Core (dc) format";
+  <http://www.w3.org/ns/dcat#keyword> "Dublin Core", "NARCIS";
+  <http://www.w3.org/ns/dcat#landingPage> <https://doi.org/10.34894/QOH33L>;
+  <http://www.w3.org/ns/dcat#theme> <http://ns.thedatatank.com/dcat/themes#Government>,
+    <http://publications.europa.eu/resource/authority/eurovoc/209065> .
+ 
+<https://fairsfair.fair-dtls.surf-hosted.nl/dataset/fb33948b-8656-44aa-9bfc-4acd39d0784c/metrics/445c0a70d1e214e545b261559e2842f4>
+  <http://semanticscience.org/resource/SIO_000332> <https://www.ietf.org/rfc/rfc3986.txt>;
+  <http://semanticscience.org/resource/SIO_000628> <https://www.ietf.org/rfc/rfc3986.txt> .
+ 
+<https://fairsfair.fair-dtls.surf-hosted.nl/dataset/fb33948b-8656-44aa-9bfc-4acd39d0784c/metrics/5d27e854a9e78eb3f663331cd47cdc13>
+  <http://semanticscience.org/resource/SIO_000332> <https://www.wikidata.org/wiki/Q8777>;
+  <http://semanticscience.org/resource/SIO_000628> <https://www.wikidata.org/wiki/Q8777> .
+ 
+<https://fairsfair.fair-dtls.surf-hosted.nl/dataset/fb33948b-8656-44aa-9bfc-4acd39d0784c#accessRights>
+  a <http://purl.org/dc/terms/RightsStatement>;
+  <http://purl.org/dc/terms/description> "This resource has no access restriction" .
+ 
+<https://fairsfair.fair-dtls.surf-hosted.nl/dataset/fb33948b-8656-44aa-9bfc-4acd39d0784c#identifier>
+  a <http://purl.org/spar/datacite/Identifier>;
+  <http://purl.org/dc/terms/identifier> "https://fairsfair.fair-dtls.surf-hosted.nl/dataset/fb33948b-8656-44aa-9bfc-4acd39d0784c" .
