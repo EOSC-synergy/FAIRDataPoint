@@ -13,7 +13,7 @@ pipeline {
                 }
             }
             steps {
-                sh "docker build -f Dockefile.build -t fairdatapoint:local ."
+                sh "docker build -t fairdatapoint:local ."
                 }
             }
         }
